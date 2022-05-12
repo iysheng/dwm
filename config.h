@@ -43,6 +43,7 @@ static const Rule rules[] = {
 	/* class      instance    title       tags mask     isfloating   monitor */
 	{ "Gimp",     NULL,       NULL,       0,            1,           -1 },
 	{ "Firefox",  NULL,       NULL,       1 << 8,       0,           -1 },
+	{ "draw.io",   NULL,       NULL,       1 << 7,       0,           -1 },
 };
 
 /* layout(s) */
@@ -76,7 +77,11 @@ static const char scratchpadname[] = "scratchpad";
 static const char *scratchpadcmd[] = { "alacritty", "--option", "window.title=""scratchpad""", "window.dimensions={lines:52, columns:120}", NULL};
 static const char *slockcmd[] = { "slock", NULL };
 static const char *firefoxcmd[] = { "firefox", NULL };
+static const char *drawiocmd[] = { "drawio", NULL };
 static const char *pdfcmd[] = { "evince", NULL };
+static const char *dictcmd[]  = { "d", "$(xsel -o)", NULL };
+static const char *flameshotcmd[]  = { "flameshot", "gui", NULL };
+
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
@@ -120,8 +125,11 @@ static Key keys[] = {
 	{ MODKEY,                       XK_period, focusmon,       {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
+	{ MODKEY,                       XK_Print,   spawn,         {.v = flameshotcmd} },
+	{ MODKEY|ShiftMask,             XK_d,       spawn,         {.v = dictcmd} },
 	{ MODKEY|ShiftMask,             XK_l,       spawn,         {.v = slockcmd } },
 	{ MODKEY|ShiftMask,             XK_f,       spawn,         {.v = firefoxcmd } },
+	{ MODKEY|ShiftMask,             XK_o,       spawn,         {.v = drawiocmd } },
 	{ MODKEY|ShiftMask,             XK_p,       spawn,         {.v = pdfcmd } },
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
